@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product_list_json_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class ProductListJsonModel extends ProductListEntity {
   const ProductListJsonModel({
     super.products,
@@ -13,5 +13,5 @@ class ProductListJsonModel extends ProductListEntity {
   factory ProductListJsonModel.fromJson(Map<String, dynamic> json) =>
       _$ProductListJsonModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProductListJsonModelToJson(this);
+  //Map<String, dynamic> toJson() => _$ProductListJsonModelToJson(this);
 }

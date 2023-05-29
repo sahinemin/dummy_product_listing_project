@@ -1,8 +1,7 @@
 import 'package:dummy_clean_project/core/constants.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     this.title = AppConstants.appName,
     super.key,
