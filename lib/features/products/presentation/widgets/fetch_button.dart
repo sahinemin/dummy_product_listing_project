@@ -24,9 +24,9 @@ class _FetchButtonState extends State<FetchButton> {
               });
               Future.delayed(
                 const Duration(seconds: 1),
-                () => BlocProvider.of<ProductBloc>(context).add(
-                  FetchProductList(),
-                ),
+                () => context.read<ProductBloc>().add(
+                      FetchProductList(),
+                    ),
               );
             },
       child: const Text('fetch'),

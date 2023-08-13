@@ -15,5 +15,6 @@ class AppClient extends ChopperClient {
               {'Content-Type': 'application/json'},
             )
           ],
+          converter: const JsonConverter(),
         );
 }

@@ -7,11 +7,11 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  runApp(const MyApp());
+  runApp(const DummyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DummyApp extends StatelessWidget {
+  const DummyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

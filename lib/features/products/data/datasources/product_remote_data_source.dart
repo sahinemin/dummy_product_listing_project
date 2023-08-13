@@ -1,4 +1,3 @@
-import 'package:dummy_clean_project/core/decoder.dart';
 import 'package:dummy_clean_project/core/error/exception.dart';
 import 'package:dummy_clean_project/features/products/data/models/product_list_json_model.dart';
 import 'package:dummy_clean_project/features/products/data/service/product_service.dart';
@@ -17,7 +16,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     final response = await productListService.fetchProducts();
     if (response.isSuccessful) {
       return ProductListJsonModel.fromJson(
-        Decoder.instance.jsonDecode(response.body!),
+        response.body!,
       );
     } else {
       throw ServerException();

@@ -7,5 +7,5 @@ abstract class ProductListService extends ChopperService {
   static ProductListService create([ChopperClient? client]) =>
       _$ProductListService(client);
   @Get()
-  Future<Response<String>> fetchProducts();
+  Future<Response<Map<String, dynamic>>> fetchProducts();
 }
