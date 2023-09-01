@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static final routes = GoRouter(
-    routes: [
+    routes: <RouteBase>[
       GoRoute(
         path: '/',
         builder: (context, state) => const ProductsPage(),

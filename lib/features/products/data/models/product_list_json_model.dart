@@ -4,7 +4,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'product_list_json_model.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable(
+  createToJson: false,
+)
 class ProductListJsonModel extends ProductListEntity {
   const ProductListJsonModel({
     super.products,

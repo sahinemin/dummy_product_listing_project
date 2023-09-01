@@ -14,6 +14,12 @@ final sl = GetIt.instance;
 Future<void> init() async {
   //! Features - Product List
   sl
+    ..registerSingleton(
+      AppClient().getService<ProductListService>(),
+    )
+
+    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
+
     ..registerFactory(
       () => ProductBloc(sl()),
     )
@@ -28,9 +34,6 @@ Future<void> init() async {
     ..registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(productListService: sl()),
     )
-    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
-    ..registerSingleton(
-      AppClient().getService<ProductListService>(),
-    )
+    
     ..registerLazySingleton(Connectivity.new);
 }

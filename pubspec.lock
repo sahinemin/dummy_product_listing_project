@@ -34,7 +34,7 @@ packages:
     source: hosted
     version: "2.11.0"
   bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: bloc
       sha256: "3820f15f502372d979121de1f6b97bfcf1630ebff8fe1d52fb2b0bfa49be5b49"
@@ -133,18 +133,18 @@ packages:
     dependency: "direct main"
     description:
       name: chopper
-      sha256: "23aac2db54f6a7854ed8984fba4b33222e53123c71a0ccf01d2b1087a1b5aab7"
+      sha256: "8cc23242759fb2d8a325e3e2371094f73e14fec02f01ebaba51e03db5e9eabab"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.4"
+    version: "7.0.3"
   chopper_generator:
     dependency: "direct dev"
     description:
       name: chopper_generator
-      sha256: "09d512f1acb086cf4101bef02bdb23ee7a8eb55a9935f53af866736606c57523"
+      sha256: "3e55981c7c208269263263d61d23afec9f08ddb022e728bd3ab2cb344096b1a2"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.3"
+    version: "7.0.1"
   clock:
     dependency: transitive
     description:
@@ -332,10 +332,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "00d1b67d6e9fa443331da229084dd3eb04407f5a2dff22940bd7bba6af5722c3"
+      sha256: b3cadd2cd59a4103fd5f6bc572ca75111264698784e927aa471921c3477d5475
       url: "https://pub.dev"
     source: hosted
-    version: "7.1.1"
+    version: "10.0.0"
   graphs:
     dependency: transitive
     description:
@@ -686,5 +686,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.0.0 <4.0.0"
+  dart: ">=3.0.6 <4.0.0"
   flutter: ">=3.3.0"

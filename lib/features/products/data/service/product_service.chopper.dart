@@ -6,7 +6,7 @@ part of 'product_service.dart';
 // ChopperGenerator
 // **************************************************************************
 
-class _$ProductListService extends ProductListService {
+final class _$ProductListService extends ProductListService {
   _$ProductListService([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;

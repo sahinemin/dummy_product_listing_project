@@ -27,7 +27,6 @@ class ProductEntity extends Equatable {
   final String? thumbnail;
   final List<String>? images;
 
-
   @override
   List<Object?> get props {
     return [
