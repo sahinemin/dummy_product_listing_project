@@ -1,23 +1,35 @@
 import 'package:dummy_clean_project/features/products/presentation/bloc/product_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-class ProductList extends StatelessWidget {
+final class ProductList extends StatelessWidget {
   const ProductList({
-    required this.state,
     super.key,
   });
 
-  final ProductListLoaded state;
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: state.productList.products?.length ?? 0,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(
-            state.productList.products?.elementAt(index).brand ?? '',
-          ),
+    return BlocBuilder<ProductBloc, ProductState>(
+      builder: (context, state) {
+        state as ProductListLoaded;
+        return ListView.builder(
+          itemCount: state.productList.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: TextButton(
+                onPressed: () {
+                  context.read<ProductBloc>().add(
+                        FetchProductDetail(
+                          state.productList.elementAt(index).id ?? 1,
+                        ),
+                      );
+                  context.push('/productDetail');
+                },
+                child: Text(state.productList.elementAt(index).brand ?? ''),
+              ),
+            );
+          },
         );
       },
     );

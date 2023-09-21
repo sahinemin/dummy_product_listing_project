@@ -21,3 +21,18 @@ ProductJsonModel _$ProductJsonModelFromJson(Map<String, dynamic> json) =>
       images:
           (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
     );
+
+Map<String, dynamic> _$ProductJsonModelToJson(ProductJsonModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'description': instance.description,
+      'price': instance.price,
+      'discountPercentage': instance.discountPercentage,
+      'rating': instance.rating,
+      'stock': instance.stock,
+      'brand': instance.brand,
+      'category': instance.category,
+      'thumbnail': instance.thumbnail,
+      'images': instance.images,
+    };
