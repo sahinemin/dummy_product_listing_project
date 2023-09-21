@@ -5,6 +5,7 @@ import 'package:dummy_clean_project/features/products/data/datasources/product_r
 import 'package:dummy_clean_project/features/products/data/repositories/product_repository_impl.dart';
 import 'package:dummy_clean_project/features/products/data/service/product_service.dart';
 import 'package:dummy_clean_project/features/products/domain/repositories/product_repository.dart';
+import 'package:dummy_clean_project/features/products/domain/usecases/get_product_detail.dart';
 import 'package:dummy_clean_project/features/products/domain/usecases/get_product_list.dart';
 import 'package:dummy_clean_project/features/products/presentation/bloc/product_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -17,23 +18,23 @@ Future<void> init() async {
     ..registerSingleton(
       AppClient().getService<ProductListService>(),
     )
-
     ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
-
     ..registerFactory(
-      () => ProductBloc(sl()),
+      () => ProductBloc(sl(), sl()),
     )
     ..registerLazySingleton(() => GetProductList(sl()))
-
+    ..registerLazySingleton(() => GetProductDetail(sl()))
     //! Repository
     ..registerLazySingleton<ProductRepository>(
-      () => ProductRepositoryImpl(networkInfo: sl(), remoteDataSource: sl()),
+      () => ProductRepositoryImpl(remoteDataSource: sl()),
     )
 
     //! Data sources
     ..registerLazySingleton<ProductRemoteDataSource>(
-      () => ProductRemoteDataSourceImpl(productListService: sl()),
+      () => ProductRemoteDataSourceImpl(
+        productListService: sl(),
+        networkInfo: sl(),
+      ),
     )
-    
     ..registerLazySingleton(Connectivity.new);
 }

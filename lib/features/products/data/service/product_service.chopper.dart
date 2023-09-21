@@ -25,4 +25,15 @@ final class _$ProductListService extends ProductListService {
     );
     return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
   }
+
+  @override
+  Future<Response<Map<String, dynamic>>> fetchProductDetail(int productId) {
+    final $url = Uri.parse('/products/$productId');
+    final $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<Map<String, dynamic>, Map<String, dynamic>>($request);
+  }
 }

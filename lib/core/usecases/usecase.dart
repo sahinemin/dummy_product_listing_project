@@ -10,3 +10,11 @@ class NoParameters extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class ProductDetailParams extends Equatable {
+  const ProductDetailParams({required this.productId});
+  const ProductDetailParams.empty() : productId = 1;
+  final int productId;
+  @override
+  List<Object?> get props => [productId];
+}

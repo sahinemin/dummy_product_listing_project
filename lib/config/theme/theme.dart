@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AppTheme {
+final class AppTheme {
+  factory AppTheme() {
+    return _singleton;
+  }
+
+  AppTheme._internal();
+  static final AppTheme _singleton = AppTheme._internal();
+
   final _lightTheme = ThemeData(
     primarySwatch: Colors.blue,
   );

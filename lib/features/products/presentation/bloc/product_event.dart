@@ -7,4 +7,15 @@ abstract class ProductEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchProductList extends ProductEvent {}
+final class FetchProductList extends ProductEvent {}
+
+final class ReturnToProductListLoaded extends ProductEvent {}
+
+final class FetchProductDetail extends ProductEvent {
+  const FetchProductDetail(this.productId);
+
+  final int productId;
+
+  @override
+  List<Object> get props => [productId];
+}
