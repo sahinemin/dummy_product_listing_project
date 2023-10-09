@@ -13,20 +13,10 @@ import 'package:get_it/get_it.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  //! Features - Product List
   sl
+    //! Product Service
     ..registerSingleton(
-      AppClient().getService<ProductListService>(),
-    )
-    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()))
-    ..registerFactory(
-      () => ProductBloc(sl(), sl()),
-    )
-    ..registerLazySingleton(() => GetProductList(sl()))
-    ..registerLazySingleton(() => GetProductDetail(sl()))
-    //! Repository
-    ..registerLazySingleton<ProductRepository>(
-      () => ProductRepositoryImpl(remoteDataSource: sl()),
+      AppClient().getService<ProductService>(),
     )
 
     //! Data sources
@@ -36,5 +26,23 @@ Future<void> init() async {
         networkInfo: sl(),
       ),
     )
-    ..registerLazySingleton(Connectivity.new);
+
+    //! Repository
+    ..registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(remoteDataSource: sl()),
+    )
+
+    //! Usecases
+    ..registerLazySingleton(() => GetProductList(sl()))
+    ..registerLazySingleton(() => GetProductDetail(sl()))
+    
+    //! Bloc
+    ..registerFactory(
+      () => ProductBloc(sl(), sl()),
+    )
+
+    //! connectivity_plus instance created
+    ..registerLazySingleton(Connectivity.new)
+    //! connectivity_plus injected
+    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 }

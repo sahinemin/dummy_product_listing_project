@@ -6,14 +6,14 @@ part of 'product_service.dart';
 // ChopperGenerator
 // **************************************************************************
 
-final class _$ProductListService extends ProductListService {
-  _$ProductListService([ChopperClient? client]) {
+final class _$ProductService extends ProductService {
+  _$ProductService([ChopperClient? client]) {
     if (client == null) return;
     this.client = client;
   }
 
   @override
-  final definitionType = ProductListService;
+  final definitionType = ProductService;
 
   @override
   Future<Response<Map<String, dynamic>>> fetchProducts() {

@@ -7,7 +7,7 @@ base class AppClient extends ChopperClient {
       : super(
           baseUrl: Uri.parse(AppConstants.baseUrl),
           services: [
-            ProductListService.create(),
+            ProductService.create(),
           ],
           interceptors: [
             const HeadersInterceptor(

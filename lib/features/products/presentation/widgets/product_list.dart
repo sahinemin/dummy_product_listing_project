@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:dummy_clean_project/config/router/app_router.gr.dart';
 import 'package:dummy_clean_project/features/products/presentation/bloc/product_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 final class ProductList extends StatelessWidget {
   const ProductList({
@@ -18,14 +19,7 @@ final class ProductList extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               title: TextButton(
-                onPressed: () {
-                  context.read<ProductBloc>().add(
-                        FetchProductDetail(
-                          state.productList.elementAt(index).id ?? 1,
-                        ),
-                      );
-                  context.push('/productDetail');
-                },
+                onPressed: () => pushToProductDetailPage(context, state, index),
                 child: Text(state.productList.elementAt(index).brand ?? ''),
               ),
             );
@@ -33,5 +27,18 @@ final class ProductList extends StatelessWidget {
         );
       },
     );
+  }
+
+  void pushToProductDetailPage(
+    BuildContext context,
+    ProductListLoaded state,
+    int index,
+  ) {
+    context.read<ProductBloc>().add(
+          FetchProductDetail(
+            state.productList.elementAt(index).id ?? 1,
+          ),
+        );
+    context.router.push(const ProductDetailRoute());
   }
 }

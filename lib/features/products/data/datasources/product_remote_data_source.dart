@@ -11,18 +11,18 @@ abstract interface class ProductRemoteDataSource {
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   ProductRemoteDataSourceImpl({
     required NetworkInfo networkInfo,
-    required ProductListService productListService,
+    required ProductService productListService,
   })  : _networkInfo = networkInfo,
-        _productListService = productListService;
+        _productService = productListService;
 
   final NetworkInfo _networkInfo;
-  final ProductListService _productListService;
+  final ProductService _productService;
   @override
   Future<List<ProductJsonModel>> getProductList() async {
     if (!await _networkInfo.isConnected) {
       throw const NetworkException();
     }
-    final response = await _productListService.fetchProducts();
+    final response = await _productService.fetchProducts();
     if (response.isSuccessful) {
       final productList = response.body!['products'] as List<dynamic>;
       return productList
@@ -38,7 +38,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     if (!await _networkInfo.isConnected) {
       throw const NetworkException();
     }
-    final response = await _productListService.fetchProductDetail(productId);
+    final response = await _productService.fetchProductDetail(productId);
     if (response.isSuccessful) {
       final product = response.body!;
       return ProductJsonModel.fromJson(product);

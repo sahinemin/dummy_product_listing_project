@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dummy_clean_project/core/widgets/custom_app_bar.dart';
 import 'package:dummy_clean_project/features/products/presentation/bloc/product_bloc.dart';
 
@@ -5,6 +6,8 @@ import 'package:dummy_clean_project/features/products/presentation/widgets/produ
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+@RoutePage()
 final class ProductListPage extends StatelessWidget {
   const ProductListPage({super.key});
   @override

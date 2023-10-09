@@ -11,9 +11,8 @@ import 'package:dummy_clean_project/features/products/domain/entities/product_en
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../mock/network_info.mock.dart';
 import '../mock/product_remote_data_source.mock.dart';
-
-
 
 void main() {
   late ProductRemoteDataSource remoteDataSource;
@@ -95,14 +94,14 @@ void main() {
       },
     );
     test(
-      'should return a Server Failure when the call to remote '
-      'has thrown a ServerException',
+      'should return a Client Failure when the call to remote '
+      'has thrown a Socket Exception',
       () async {
+        const tException = SocketException('Socket has been closed');
         when(() => networkInfo.isConnected)
             .thenAnswer((_) async => Future<bool>.value(false));
 
-        when(() => remoteDataSource.getProductList())
-            .thenThrow(const SocketException('Socket has been closed'));
+        when(() => remoteDataSource.getProductList()).thenThrow(tException);
 
         final result = await repositoryImpl.getProductList();
 
@@ -113,21 +112,21 @@ void main() {
 
         expect(
           result,
-          const Left<ClientFailure, List<ProductEntity>>(
-            ClientFailure('Socket has been closed'),
+          Left<ClientFailure, List<ProductEntity>>(
+            ClientFailure(tException.message),
           ),
         );
       },
     );
     test(
-      'should return a Client Failure when the call to remote '
-      'has thrown a Socket Exception',
+      'should return a Server Failure when the call to remote '
+      'has thrown a ServerException',
       () async {
+        const tException = ServerException('Unknown Error Occured', 500);
         when(() => networkInfo.isConnected)
             .thenAnswer((_) async => expectedNetworkInfoAnswer);
 
-        when(() => remoteDataSource.getProductList())
-            .thenThrow(const ServerException('Unknown Error Occured', 500));
+        when(() => remoteDataSource.getProductList()).thenThrow(tException);
 
         final result = await repositoryImpl.getProductList();
 
@@ -138,8 +137,11 @@ void main() {
 
         expect(
           result,
-          const Left<ServerFailure, List<ProductEntity>>(
-            ServerFailure('Unknown Error Occured', statusCode: 500),
+          Left<ServerFailure, List<ProductEntity>>(
+            ServerFailure(
+              tException.message,
+              statusCode: tException.statusCode,
+            ),
           ),
         );
       },
@@ -151,7 +153,7 @@ void main() {
     const productId = 1;
     test(
       'should call the [RemoteDataSource.getProductDetail] '
-      'and get product list successfully '
+      'and get product detail successfully '
       'when the call to the remote source is successful',
       () async {
         //arrange
@@ -170,14 +172,15 @@ void main() {
       },
     );
     test(
-      'should return a Failure when the call to remote '
+      'should return a Server Failure when the call to remote '
       'is unsuccessful',
       () async {
+        const tException = ServerException('Unknown Error Occured', 500);
         when(() => networkInfo.isConnected)
             .thenAnswer((_) async => expectedNetworkInfoAnswer);
 
         when(() => remoteDataSource.getProductDetail(productId))
-            .thenThrow(const ServerException('Unknown Error Occured', 500));
+            .thenThrow(tException);
 
         final result = await repositoryImpl.getProductDetail(productId);
 
@@ -188,8 +191,62 @@ void main() {
 
         expect(
           result,
-          const Left<ServerFailure, ProductEntity>(
-            ServerFailure('Unknown Error Occured', statusCode: 500),
+          Left<ServerFailure, ProductEntity>(
+            ServerFailure(
+              tException.message,
+              statusCode: tException.statusCode,
+            ),
+          ),
+        );
+      },
+    );
+    test(
+      'should return a Network Failure when the call to remote '
+      'has thrown a Network Exception',
+      () async {
+        when(() => networkInfo.isConnected)
+            .thenAnswer((_) async => Future<bool>.value(false));
+
+        when(() => remoteDataSource.getProductDetail(productId))
+            .thenThrow(const NetworkException());
+
+        final result = await repositoryImpl.getProductDetail(productId);
+
+        //assert
+
+        verify(() => remoteDataSource.getProductDetail(productId)).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+
+        expect(
+          result,
+          const Left<NetworkFailure, List<ProductEntity>>(
+            NetworkFailure('No Internet Connection', statusCode: 0),
+          ),
+        );
+      },
+    );
+    test(
+      'should return a Client Failure when the call to remote '
+      'has thrown a Socket Exception',
+      () async {
+        const tException = SocketException('Socket has been closed');
+        when(() => networkInfo.isConnected)
+            .thenAnswer((_) async => Future<bool>.value(false));
+
+        when(() => remoteDataSource.getProductDetail(productId))
+            .thenThrow(tException);
+
+        final result = await repositoryImpl.getProductDetail(productId);
+
+        //assert
+
+        verify(() => remoteDataSource.getProductDetail(productId)).called(1);
+        verifyNoMoreInteractions(remoteDataSource);
+
+        expect(
+          result,
+          Left<ClientFailure, List<ProductEntity>>(
+            ClientFailure(tException.message),
           ),
         );
       },
