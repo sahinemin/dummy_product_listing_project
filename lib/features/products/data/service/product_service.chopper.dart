@@ -17,7 +17,7 @@ final class _$ProductService extends ProductService {
 
   @override
   Future<Response<Map<String, dynamic>>> fetchProducts() {
-    final $url = Uri.parse('/products');
+    final $url = Uri.parse(kProductServicePath);
     final $request = Request(
       'GET',
       $url,
@@ -28,7 +28,7 @@ final class _$ProductService extends ProductService {
 
   @override
   Future<Response<Map<String, dynamic>>> fetchProductDetail(int productId) {
-    final $url = Uri.parse('/products/$productId');
+    final $url = Uri.parse('$kProductServicePath/$productId');
     final $request = Request(
       'GET',
       $url,

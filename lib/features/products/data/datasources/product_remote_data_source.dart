@@ -8,7 +8,7 @@ abstract interface class ProductRemoteDataSource {
   Future<ProductJsonModel> getProductDetail(int productId);
 }
 
-class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
+final class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   ProductRemoteDataSourceImpl({
     required NetworkInfo networkInfo,
     required ProductService productListService,
@@ -22,15 +22,16 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     if (!await _networkInfo.isConnected) {
       throw const NetworkException();
     }
-    final response = await _productService.fetchProducts();
-    if (response.isSuccessful) {
+      final response = await _productService.fetchProducts();
+
+      if (!response.isSuccessful) {
+        throw ServerException(response.error.toString(), response.statusCode);
+      }
       final productList = response.body!['products'] as List<dynamic>;
       return productList
           .map((e) => ProductJsonModel.fromJson(e as Map<String, dynamic>))
           .toList();
-    } else {
-      throw ServerException(response.error.toString(), response.statusCode);
-    }
+
   }
 
   @override
@@ -39,11 +40,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       throw const NetworkException();
     }
     final response = await _productService.fetchProductDetail(productId);
-    if (response.isSuccessful) {
-      final product = response.body!;
-      return ProductJsonModel.fromJson(product);
-    } else {
+    if (!response.isSuccessful) {
       throw ServerException(response.error.toString(), response.statusCode);
     }
+    final product = response.body!;
+    return ProductJsonModel.fromJson(product);
   }
 }

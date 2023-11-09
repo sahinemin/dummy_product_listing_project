@@ -14,14 +14,16 @@ class ProductDetailPage extends StatelessWidget {
         overrideTitle: 'Products',
         onBack: () {
           BlocProvider.of<ProductBloc>(context)
-              .add(ReturnToProductListLoaded());
-          context.router.pop(); 
+              .add(const FetchProductList());
+          context.router.pop();
         },
       ),
       body: BlocBuilder<ProductBloc, ProductState>(
         builder: (context, state) {
           if (state is ProducDetailLoaded) {
             return Text(state.product.description ?? '');
+          } else if (state is ProductFailed) {
+            return const Placeholder();
           } else {
             return const CircularProgressIndicator();
           }

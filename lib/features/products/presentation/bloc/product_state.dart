@@ -7,9 +7,13 @@ sealed class ProductState extends Equatable {
   List<Object> get props => [];
 }
 
-final class ProductInitial extends ProductState {}
+final class ProductInitial extends ProductState {
+  const ProductInitial();
+}
 
-final class ProductLoading extends ProductState {}
+final class ProductLoading extends ProductState {
+  const ProductLoading();
+}
 
 final class ProductListLoaded extends ProductState {
   const ProductListLoaded({
@@ -29,8 +33,8 @@ final class ProducDetailLoaded extends ProductState {
   List<Object> get props => [product];
 }
 
-final class ProductListFailed extends ProductState {
-  const ProductListFailed(this.message);
+final class ProductFailed extends ProductState {
+  const ProductFailed(this.message);
   final String message;
   @override
   List<Object> get props => [message];

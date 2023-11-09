@@ -20,7 +20,7 @@ void main() {
   test('should call [ProductRepository.getProductList()]', () async {
     when(() => repository.getProductList())
         .thenAnswer((invocation) async => const Right([]));
-    final result = await usecase(NoParameters());
+    final result = await usecase(const NoParameters());
     expect(result, const Right<dynamic, List<ProductEntity>>([]));
     verify(() => repository.getProductList()).called(1);
     verifyNoMoreInteractions(repository);

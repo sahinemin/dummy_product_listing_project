@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dummy_clean_project/core/error/exception.dart';
 import 'package:dummy_clean_project/core/error/failures.dart';
+import 'package:http/http.dart';
 
 typedef ApiCallResult<T> = Future<Either<Failure, T>>;
 
@@ -16,7 +15,7 @@ final class ApiRequest {
       return Left(NetworkFailure(e.message, statusCode: e.statusCode));
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message, statusCode: e.statusCode));
-    } on SocketException catch (e) {
+    } on ClientException catch (e) {
       return Left(ClientFailure(e.message));
     }
   }

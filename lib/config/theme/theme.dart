@@ -9,9 +9,10 @@ final class AppTheme {
   static final AppTheme _singleton = AppTheme._internal();
 
   final _lightTheme = ThemeData(
-    primarySwatch: Colors.blue,
+    useMaterial3: true,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
   );
-  final _darkTheme = ThemeData.dark();
+  final _darkTheme = ThemeData.dark(useMaterial3: true);
 
   ThemeData get getLightTheme => _lightTheme;
   ThemeData get getDarkTheme => _darkTheme;

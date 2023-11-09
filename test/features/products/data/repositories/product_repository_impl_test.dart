@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dummy_clean_project/core/error/exception.dart';
 import 'package:dummy_clean_project/core/error/failures.dart';
@@ -9,6 +7,7 @@ import 'package:dummy_clean_project/features/products/data/models/product_json_m
 import 'package:dummy_clean_project/features/products/data/repositories/product_repository_impl.dart';
 import 'package:dummy_clean_project/features/products/domain/entities/product_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../mock/network_info.mock.dart';
@@ -18,21 +17,13 @@ void main() {
   late ProductRemoteDataSource remoteDataSource;
   late ProductRepositoryImpl repositoryImpl;
   late NetworkInfo networkInfo;
+
   setUp(() {
     remoteDataSource = MockProductRemoteDataSource();
     networkInfo = MockNetworkInfo();
     repositoryImpl = ProductRepositoryImpl(
       remoteDataSource: remoteDataSource,
     );
-  });
-
-  test('should check if the device is online', () {
-    final expectedNetworkInfoAnswer = Future<bool>.value(false);
-    // arrange
-    when(() => networkInfo.isConnected)
-        .thenAnswer((_) => expectedNetworkInfoAnswer);
-    // assert
-    expect(expectedNetworkInfoAnswer, equals(networkInfo.isConnected));
   });
 
   group('getProductList', () {
@@ -93,13 +84,14 @@ void main() {
         );
       },
     );
+
     test(
       'should return a Client Failure when the call to remote '
       'has thrown a Socket Exception',
       () async {
-        const tException = SocketException('Socket has been closed');
+        final tException = ClientException('Socket has been closed');
         when(() => networkInfo.isConnected)
-            .thenAnswer((_) async => Future<bool>.value(false));
+            .thenAnswer((_) async => Future<bool>.value(true));
 
         when(() => remoteDataSource.getProductList()).thenThrow(tException);
 
@@ -118,6 +110,7 @@ void main() {
         );
       },
     );
+
     test(
       'should return a Server Failure when the call to remote '
       'has thrown a ServerException',
@@ -225,11 +218,12 @@ void main() {
         );
       },
     );
+
     test(
       'should return a Client Failure when the call to remote '
       'has thrown a Socket Exception',
       () async {
-        const tException = SocketException('Socket has been closed');
+        final tException = ClientException('Socket has been closed');
         when(() => networkInfo.isConnected)
             .thenAnswer((_) async => Future<bool>.value(false));
 

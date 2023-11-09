@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ServerException extends Equatable implements Exception {
+final class ServerException extends Equatable implements Exception {
   const ServerException(this.message, this.statusCode);
   final String message;
   final int statusCode;
@@ -9,7 +9,7 @@ class ServerException extends Equatable implements Exception {
   List<Object?> get props => [message, statusCode];
 }
 
-class NetworkException extends Equatable implements Exception {
+final class NetworkException extends Equatable implements Exception {
   const NetworkException({
     this.message = 'No Internet Connection',
     this.statusCode = 0,

@@ -6,9 +6,8 @@ abstract class UseCase<Type, Params> {
   Future<Either<Failure, Type>> call(Params params);
 }
 
-class NoParameters extends Equatable {
-  @override
-  List<Object?> get props => [];
+class NoParameters {
+  const NoParameters();
 }
 
 class ProductDetailParams extends Equatable {

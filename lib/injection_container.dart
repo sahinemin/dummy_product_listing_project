@@ -35,10 +35,13 @@ Future<void> init() async {
     //! Usecases
     ..registerLazySingleton(() => GetProductList(sl()))
     ..registerLazySingleton(() => GetProductDetail(sl()))
-    
+
     //! Bloc
     ..registerFactory(
-      () => ProductBloc(sl(), sl()),
+      () => ProductBloc(
+         sl(),
+         sl(),
+      ),
     )
 
     //! connectivity_plus instance created

@@ -4,8 +4,8 @@ import 'package:dummy_clean_project/features/products/presentation/bloc/product_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final class ProductList extends StatelessWidget {
-  const ProductList({
+final class ProductListViewBuilder extends StatelessWidget {
+  const ProductListViewBuilder({
     super.key,
   });
 
@@ -19,7 +19,8 @@ final class ProductList extends StatelessWidget {
           itemBuilder: (context, index) {
             return ListTile(
               title: TextButton(
-                onPressed: () => pushToProductDetailPage(context, state, index),
+                onPressed: () =>
+                    navigateToProductDetailPage(context, state, index),
                 child: Text(state.productList.elementAt(index).brand ?? ''),
               ),
             );
@@ -29,7 +30,7 @@ final class ProductList extends StatelessWidget {
     );
   }
 
-  void pushToProductDetailPage(
+  void navigateToProductDetailPage(
     BuildContext context,
     ProductListLoaded state,
     int index,

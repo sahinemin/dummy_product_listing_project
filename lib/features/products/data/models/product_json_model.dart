@@ -19,8 +19,9 @@ class ProductJsonModel extends ProductEntity {
   });
   factory ProductJsonModel.fromJson(Map<String, dynamic> json) =>
       _$ProductJsonModelFromJson(json);
+
   const ProductJsonModel.test()
-      : this(
+      : super(
           id: 1,
           title: 'iPhone 9',
           description: 'An apple mobile which is nothing like apple',
@@ -39,6 +40,7 @@ class ProductJsonModel extends ProductEntity {
             'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
           ],
         );
+
   ProductJsonModel copyWith({
     int? id,
     String? title,

@@ -1,6 +1,6 @@
 class AppConstants {
   static const String appName = 'DummyApp';
-  static const String baseUrl = 'https://dummyjson.com';
+  static const String kbaseUrl = 'https://dummyjson.com';
   static const String serverFailureMessage = 'Server Failure';
   static const String clientFailureMessage = 'Client Failure';
   static const String networkFailureMessage =

@@ -8,54 +8,59 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'product_event.dart';
 part 'product_state.dart';
 
-class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  ProductBloc(this._getProductList, this._getProductDetail)
-      : super(ProductInitial()) {
-    var localProductList = <ProductEntity>[];
-    on<ProductEvent>((event, emit) async {
-      if (event is FetchProductList) {
-        emit(ProductLoading());
-        if (localProductList.isNotEmpty) {
-          emit(ProductListLoaded(productList: localProductList));
-          return;
-        }
-        final failureOrProductList = await _getProductList(
-          NoParameters(),
-        );
+final class ProductBloc extends Bloc<ProductEvent, ProductState> {
+  ProductBloc(
+     GetProductList getProductList,
+     GetProductDetail getProductDetail,
+  )  : _getProductDetail = getProductDetail,
+        _getProductList = getProductList,
+        super(const ProductInitial()) {
+    
+    Future<void> fetchProductListHandler(
+      FetchProductList event,
+      Emitter<ProductState> emit,
+    ) async {
+      emit(const ProductLoading());
+      
 
-        failureOrProductList.fold(
-          (failure) => emit(
-            ProductListFailed(
-              failure.message,
-            ),
-          ),
-          (productList) => {
-            emit(
-              ProductListLoaded(productList: productList),
-            ),
-            localProductList = productList,
-          },
-        );
-      } else if (event is FetchProductDetail) {
-        emit(ProductLoading());
-        final failureOrProductList = await _getProductDetail(
-          ProductDetailParams(productId: event.productId),
-        );
+      final failureOrProductList = await _getProductList(
+        const NoParameters(),
+      );
 
-        failureOrProductList.fold(
-          (failure) => emit(
-            ProductListFailed(
-              failure.message,
-            ),
+      failureOrProductList.fold(
+        (failure) => emit(
+          ProductFailed(
+            failure.message,
           ),
-          (product) => emit(
-            ProducDetailLoaded(product: product),
+        ),
+        (productList) => emit(
+            ProductListLoaded(productList: productList),
+          ),);
+    }
+
+    Future<void> fetchProductDetailHandler(
+      FetchProductDetail event,
+      Emitter<ProductState> emit,
+    ) async {
+      emit(const ProductLoading());
+      final failureOrProductList = await _getProductDetail(
+        ProductDetailParams(productId: event.productId),
+      );
+
+      failureOrProductList.fold(
+        (failure) => emit(
+          ProductFailed(
+            failure.message,
           ),
-        );
-      } else if (event is ReturnToProductListLoaded) {
-        emit(ProductListLoaded(productList: localProductList));
-      }
-    });
+        ),
+        (product) => emit(
+          ProducDetailLoaded(product: product),
+        ),
+      );
+    }
+
+    on<FetchProductList>(fetchProductListHandler);
+    on<FetchProductDetail>(fetchProductDetailHandler);
   }
   final GetProductList _getProductList;
   final GetProductDetail _getProductDetail;

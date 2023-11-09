@@ -10,7 +10,7 @@ final class DummyApp extends StatelessWidget {
   const DummyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    final router=AppRouter();
+    final router = AppRouter();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -19,7 +19,7 @@ final class DummyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: AppConstants.appName,
-        theme: AppTheme().getLightTheme,
+        theme: AppTheme().getDarkTheme,
         darkTheme: AppTheme().getDarkTheme,
         routerConfig: router.config(),
       ),

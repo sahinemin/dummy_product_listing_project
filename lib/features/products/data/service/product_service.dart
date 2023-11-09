@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:chopper/chopper.dart';
 part 'product_service.chopper.dart';
 
-@ChopperApi(baseUrl: '/products')
+const kProductServicePath = '/products';
+
+@ChopperApi(baseUrl: kProductServicePath)
 abstract interface class ProductService extends ChopperService {
   static ProductService create([ChopperClient? client]) =>
       _$ProductService(client);

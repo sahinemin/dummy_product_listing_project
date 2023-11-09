@@ -3,7 +3,7 @@ import 'package:dummy_clean_project/core/utils/typedef.dart';
 import 'package:dummy_clean_project/features/products/domain/entities/product_entity.dart';
 import 'package:dummy_clean_project/features/products/domain/repositories/product_repository.dart';
 
-final class GetProductList extends UseCase<List<ProductEntity>, NoParameters> {
+class GetProductList extends UseCase<List<ProductEntity>, NoParameters> {
   GetProductList(this.repository);
   final ProductRepository repository;
 
