@@ -149,4 +149,33 @@ void main() {
       // assert
     });
   });
+  group('ProductJsonModel', () {
+    test('test constructor should create model with predefined values', () {
+      // Create an instance of the ProductJsonModel using the test constructor
+      const product = ProductJsonModel.test();
+
+      // Verify that the object has the expected default values
+      expect(product.id, 1);
+      expect(product.title, 'iPhone 9');
+      expect(
+          product.description, 'An apple mobile which is nothing like apple',);
+      expect(product.price, 549);
+      expect(product.discountPercentage, 12.96);
+      expect(product.rating, 4.69);
+      expect(product.stock, 94);
+      expect(product.brand, 'Apple');
+      expect(product.category, 'smartphones');
+      expect(
+        product.thumbnail,
+        'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
+      );
+      expect(product.images, [
+        'https://i.dummyjson.com/data/products/1/1.jpg',
+        'https://i.dummyjson.com/data/products/1/2.jpg',
+        'https://i.dummyjson.com/data/products/1/3.jpg',
+        'https://i.dummyjson.com/data/products/1/4.jpg',
+        'https://i.dummyjson.com/data/products/1/thumbnail.jpg',
+      ]);
+    });
+  });
 }

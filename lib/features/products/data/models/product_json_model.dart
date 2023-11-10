@@ -20,8 +20,7 @@ final class ProductJsonModel extends ProductEntity {
   factory ProductJsonModel.fromJson(Map<String, dynamic> json) =>
       _$ProductJsonModelFromJson(json);
 
-  const ProductJsonModel.test()
-      : super(
+  const ProductJsonModel.test(): this(
           id: 1,
           title: 'iPhone 9',
           description: 'An apple mobile which is nothing like apple',
