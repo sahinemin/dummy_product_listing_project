@@ -1,7 +1,7 @@
 import 'package:chopper/chopper.dart';
 import 'package:dummy_clean_project/core/client/app_client.dart';
 import 'package:dummy_clean_project/core/constants.dart';
-import 'package:dummy_clean_project/features/products/data/service/product_service.dart';
+import 'package:dummy_clean_project/features/products/service/product_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

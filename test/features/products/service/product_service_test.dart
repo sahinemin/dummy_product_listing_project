@@ -2,13 +2,14 @@ import 'dart:io';
 import 'package:chopper/chopper.dart';
 import 'package:dummy_clean_project/core/constants.dart';
 import 'package:dummy_clean_project/features/products/data/models/product_json_model.dart';
-import 'package:dummy_clean_project/features/products/data/service/product_service.dart';
+import 'package:dummy_clean_project/features/products/service/product_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../mock/client.mock.dart';
-import '../mock/request.mock.dart';
-import '../mock/response.mock.dart';
+import '../../../core/client/client.mock.dart';
+import 'mock/request.mock.dart';
+import 'mock/response.mock.dart';
+
 
 
 

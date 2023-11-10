@@ -10,7 +10,8 @@ final class ApiRequest {
     Future<T> Function() request,
   ) async {
     try {
-      return Right(await request());
+      final result = await request();
+      return Right(result);
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message, statusCode: e.statusCode));
     } on ServerException catch (e) {

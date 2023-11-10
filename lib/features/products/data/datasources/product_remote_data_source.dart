@@ -1,7 +1,7 @@
 import 'package:dummy_clean_project/core/error/exception.dart';
 import 'package:dummy_clean_project/core/platform/network_info.dart';
 import 'package:dummy_clean_project/features/products/data/models/product_json_model.dart';
-import 'package:dummy_clean_project/features/products/data/service/product_service.dart';
+import 'package:dummy_clean_project/features/products/service/product_service.dart';
 
 abstract interface class ProductRemoteDataSource {
   Future<List<ProductJsonModel>> getProductList();
@@ -22,16 +22,15 @@ final class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     if (!await _networkInfo.isConnected) {
       throw const NetworkException();
     }
-      final response = await _productService.fetchProducts();
+    final response = await _productService.fetchProducts();
 
-      if (!response.isSuccessful) {
-        throw ServerException(response.error.toString(), response.statusCode);
-      }
-      final productList = response.body!['products'] as List<dynamic>;
-      return productList
-          .map((e) => ProductJsonModel.fromJson(e as Map<String, dynamic>))
-          .toList();
-
+    if (!response.isSuccessful) {
+      throw ServerException(response.error.toString(), response.statusCode);
+    }
+    final productList = response.body!['products'] as List<dynamic>;
+    return productList
+        .map((e) => ProductJsonModel.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   @override

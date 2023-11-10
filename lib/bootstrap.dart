@@ -26,8 +26,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
     log(details.stack.toString());
   };
-
   Bloc.observer = const AppBlocObserver();
+  WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(await builder());
 }

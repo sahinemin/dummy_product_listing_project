@@ -21,8 +21,8 @@ final class ProductDetailPage extends StatelessWidget {
         builder: (context, state) {
           return switch (state) {
             ProductDetailLoaded() => Text(state.product.description ?? ''),
-            ProductLoading() => const CircularProgressIndicator(),
-            _ => const Placeholder(),
+            ProductFailed() => const Placeholder(),
+            _ => const CircularProgressIndicator(),
           };
         },
       ),

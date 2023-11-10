@@ -41,6 +41,7 @@ dependencies:
   http: ^1.1.0
   json_annotation: ^4.8.1
   mocktail: ^1.0.0
+  shared_preferences: ^2.2.2
   very_good_analysis: ^5.0.0+1
 
 
