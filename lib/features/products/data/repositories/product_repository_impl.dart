@@ -3,7 +3,7 @@ import 'package:dummy_clean_project/features/products/data/datasources/product_r
 import 'package:dummy_clean_project/features/products/domain/entities/product_entity.dart';
 import 'package:dummy_clean_project/features/products/domain/repositories/product_repository.dart';
 
-class ProductRepositoryImpl implements ProductRepository {
+final class ProductRepositoryImpl implements ProductRepository {
   ProductRepositoryImpl({
     required ProductRemoteDataSource remoteDataSource,
   }) : _remoteDataSource = remoteDataSource;

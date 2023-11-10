@@ -8,20 +8,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'product_event.dart';
 part 'product_state.dart';
 
-final class ProductBloc extends Bloc<ProductEvent, ProductState> {
+class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc(
-     GetProductList getProductList,
-     GetProductDetail getProductDetail,
-  )  : _getProductDetail = getProductDetail,
+    GetProductList getProductList,
+    GetProductDetail getProductDetail,
+  )   : _getProductDetail = getProductDetail,
         _getProductList = getProductList,
         super(const ProductInitial()) {
-    
     Future<void> fetchProductListHandler(
       FetchProductList event,
       Emitter<ProductState> emit,
     ) async {
       emit(const ProductLoading());
-      
 
       final failureOrProductList = await _getProductList(
         const NoParameters(),
@@ -34,8 +32,9 @@ final class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ),
         ),
         (productList) => emit(
-            ProductListLoaded(productList: productList),
-          ),);
+          ProductListLoaded(productList: productList),
+        ),
+      );
     }
 
     Future<void> fetchProductDetailHandler(
@@ -54,7 +53,7 @@ final class ProductBloc extends Bloc<ProductEvent, ProductState> {
           ),
         ),
         (product) => emit(
-          ProducDetailLoaded(product: product),
+          ProductDetailLoaded(product: product),
         ),
       );
     }

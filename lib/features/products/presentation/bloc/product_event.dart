@@ -1,6 +1,6 @@
 part of 'product_bloc.dart';
 
-abstract class ProductEvent extends Equatable {
+abstract interface class ProductEvent extends Equatable {
   const ProductEvent();
   @override
   List<Object> get props => [];
@@ -9,7 +9,6 @@ abstract class ProductEvent extends Equatable {
 final class FetchProductList extends ProductEvent {
   const FetchProductList();
 }
-
 
 final class FetchProductDetail extends ProductEvent {
   const FetchProductDetail(this.productId);

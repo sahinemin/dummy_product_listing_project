@@ -9,8 +9,8 @@ import 'package:dummy_clean_project/features/products/presentation/bloc/product_
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import 'mock/get_product_detail.mock.dart';
-import 'mock/get_product_list.mock.dart';
+import '../mock/get_product_detail.mock.dart';
+import '../mock/get_product_list.mock.dart';
 
 void main() {
   late GetProductList getProductList;
@@ -51,7 +51,7 @@ void main() {
           cubit.add(FetchProductDetail(tgetProductDetailParams.productId)),
       expect: () => const [
         ProductLoading(),
-        ProducDetailLoaded(product: ProductEntity.test()),
+        ProductDetailLoaded(product: ProductEntity.test()),
       ],
       verify: (_) {
         verify(() => getProductDetail(tgetProductDetailParams)).called(1);

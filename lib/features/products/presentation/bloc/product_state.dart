@@ -1,6 +1,6 @@
 part of 'product_bloc.dart';
 
-sealed class ProductState extends Equatable {
+abstract interface class ProductState extends Equatable {
   const ProductState();
 
   @override
@@ -24,8 +24,8 @@ final class ProductListLoaded extends ProductState {
   List<Object> get props => [productList];
 }
 
-final class ProducDetailLoaded extends ProductState {
-  const ProducDetailLoaded({
+final class ProductDetailLoaded extends ProductState {
+  const ProductDetailLoaded({
     required this.product,
   });
   final ProductEntity product;

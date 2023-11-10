@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'product_json_model.g.dart';
 
 @JsonSerializable()
-class ProductJsonModel extends ProductEntity {
+final class ProductJsonModel extends ProductEntity {
   const ProductJsonModel({
     super.id,
     super.title,
