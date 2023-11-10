@@ -6,15 +6,8 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
+All the code is tested
+<img width="1439" alt="Screenshot 2023-11-10 at 08 02 42" src="https://github.com/sahinemin/dummy_product_listing_project/assets/74674317/f0d40996-fa21-4317-a75a-a8b7a928b8f9">
+Very Good Analysis linter rules applied.
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 
